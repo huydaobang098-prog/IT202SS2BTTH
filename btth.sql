@@ -1,15 +1,19 @@
 CREATE DATABASE BOOK;
 USE BOOK;
 
-CREATE TABLE BOOKS (
- bookId char(5) primary key,
- bookName varchar(200) not null,
- bookQuantity int check(bookQuantity >=0),
- bookPrice decimal(10,2) default 5000
+CREATE TABLE BOOK (
+    MaSach CHAR(5) PRIMARY KEY,
+    TenSach VARCHAR(200) NOT NULL,
+    SoLuong INT CHECK (SoLuong >= 0),
+    GiaThue DECIMAL(10, 2) DEFAULT 5000
 );
 
+ALTER TABLE BOOK 
+ADD NgayNhap DATE;
+
 CREATE TABLE BORROW_BOOKS (
-	bookBorrowed int auto_increment primary key,
-    bookId char(5) primary key,
-    dayBorrowed date default (current_date)
+    MaMuon INT AUTO_INCREMENT PRIMARY KEY,
+    MaSach CHAR(5),
+    NgayMuon DATE DEFAULT (CURRENT_DATE),
+    FOREIGN KEY (MaSach) REFERENCES BOOK(MaSach)
 );
